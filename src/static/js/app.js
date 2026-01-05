@@ -4,7 +4,9 @@ function App() {
         <Container>
             <Row>
                 <Col md={{ offset: 3, span: 6 }}>
-                    <h3 className="text-center mb-3">Todo App by Shibata Kouki</h3>
+                    <h3 className="text-center mb-3">
+                        Todo App by Shibata Kouki
+                    </h3>
                     <TodoListCard />
                 </Col>
             </Row>
@@ -17,20 +19,20 @@ function TodoListCard() {
 
     React.useEffect(() => {
         fetch('/items')
-            .then(r => r.json())
+            .then((r) => r.json())
             .then(setItems);
     }, []);
 
     const onNewItem = React.useCallback(
-        newItem => {
+        (newItem) => {
             setItems([...items, newItem]);
         },
         [items],
     );
 
     const onItemUpdate = React.useCallback(
-        item => {
-            const index = items.findIndex(i => i.id === item.id);
+        (item) => {
+            const index = items.findIndex((i) => i.id === item.id);
             setItems([
                 ...items.slice(0, index),
                 item,
@@ -41,8 +43,8 @@ function TodoListCard() {
     );
 
     const onItemRemoval = React.useCallback(
-        item => {
-            const index = items.findIndex(i => i.id === item.id);
+        (item) => {
+            const index = items.findIndex((i) => i.id === item.id);
             setItems([...items.slice(0, index), ...items.slice(index + 1)]);
         },
         [items],
@@ -56,7 +58,7 @@ function TodoListCard() {
             {items.length === 0 && (
                 <p className="text-center">No items yet! Add one above!</p>
             )}
-            {items.map(item => (
+            {items.map((item) => (
                 <ItemDisplay
                     item={item}
                     key={item.id}
@@ -74,7 +76,7 @@ function AddItemForm({ onNewItem }) {
     const [newItem, setNewItem] = React.useState('');
     const [submitting, setSubmitting] = React.useState(false);
 
-    const submitNewItem = e => {
+    const submitNewItem = (e) => {
         e.preventDefault();
         setSubmitting(true);
         fetch('/items', {
@@ -82,8 +84,8 @@ function AddItemForm({ onNewItem }) {
             body: JSON.stringify({ name: newItem }),
             headers: { 'Content-Type': 'application/json' },
         })
-            .then(r => r.json())
-            .then(item => {
+            .then((r) => r.json())
+            .then((item) => {
                 onNewItem(item);
                 setSubmitting(false);
                 setNewItem('');
@@ -95,7 +97,7 @@ function AddItemForm({ onNewItem }) {
             <InputGroup className="mb-3">
                 <Form.Control
                     value={newItem}
-                    onChange={e => setNewItem(e.target.value)}
+                    onChange={(e) => setNewItem(e.target.value)}
                     type="text"
                     placeholder="New Item"
                     aria-describedby="basic-addon1"
@@ -127,7 +129,7 @@ function ItemDisplay({ item, onItemUpdate, onItemRemoval }) {
             }),
             headers: { 'Content-Type': 'application/json' },
         })
-            .then(r => r.json())
+            .then((r) => r.json())
             .then(onItemUpdate);
     };
 
@@ -154,8 +156,9 @@ function ItemDisplay({ item, onItemUpdate, onItemRemoval }) {
                     >
                         <i
                             onClick={toggleCompletion}
-                            className={`far ${item.completed ? 'fa-check-square' : 'fa-square'
-                                }`}
+                            className={`far ${
+                                item.completed ? 'fa-check-square' : 'fa-square'
+                            }`}
                         />
                     </Button>
                 </Col>

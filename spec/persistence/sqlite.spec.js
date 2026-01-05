@@ -46,8 +46,6 @@ test('it can update an existing item', async () => {
     expect(items[0].completed).toBe(!ITEM.completed);
 });
 
-
-
 test('it can get a single item', async () => {
     await db.init();
     await db.storeItem(ITEM);
@@ -65,5 +63,3 @@ test('it can remove an existing item', async () => {
     const items = await db.getItems();
     expect(items.length).toBe(0);
 });
-
-
