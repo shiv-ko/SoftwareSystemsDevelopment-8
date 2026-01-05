@@ -4,6 +4,7 @@ function App() {
         <Container>
             <Row>
                 <Col md={{ offset: 3, span: 6 }}>
+                    <h3 className="text-center mb-3">Todo App by Shibata Kouki</h3>
                     <TodoListCard />
                 </Col>
             </Row>
@@ -153,9 +154,8 @@ function ItemDisplay({ item, onItemUpdate, onItemRemoval }) {
                     >
                         <i
                             onClick={toggleCompletion}
-                            className={`far ${
-                                item.completed ? 'fa-check-square' : 'fa-square'
-                            }`}
+                            className={`far ${item.completed ? 'fa-check-square' : 'fa-square'
+                                }`}
                         />
                     </Button>
                 </Col>
